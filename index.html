@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en" style="background-color: #e9e6e6;"><!-- background-color: #FFFFFF;-->
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SoulSync</title>
+    
+  </head>
+  <body>
+
+
+    <script type="text/javascript" src="https://cdn.weglot.com/weglot.min.js"></script>
+    
+   
+    <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js" defer></script>
+<script src="https://files.bpcontent.cloud/2025/09/21/11/20250921113754-0YHYHQ8O.js" defer></script>
+    
+    
+<!-- <script>
+    Weglot.initialize({
+        api_key: 'wg_e60e3f9f3f477dc3b589dbd785cb03a01'
+    });
+</script> -->
+
+<!-- <script>
+  var vapiInstance = null;
+  const assistant = "<assistant_id>"; // Substitute with your assistant ID
+  const apiKey = "<your_public_api_key>"; // Substitute with your Public key from Vapi Dashboard.
+  
+  // Enhanced button configuration using Vapi's default official icon
+  const buttonConfig = {
+    position: "bottom-right", // Position the button on bottom-right
+    offset: "40px", // Distance from edge
+    width: "60px", // Button width
+    height: "60px", // Button height
+    idle: {
+      color: {
+        50: "#eff6ff",
+        100: "#dbeafe", 
+        200: "#bfdbfe",
+        300: "#93c5fd",
+        400: "#60a5fa",
+        500: "#3b82f6",
+        600: "#2563eb",
+        700: "#1d4ed8",
+        800: "#1e40af",
+        900: "#1e3a8a"
+      },
+      type: "pill", // or "round"
+      title: "AI Assistant",
+      subtitle: "Click to talk"
+      // No custom icon - Vapi will use its official default icon
+    },
+    loading: {
+      color: {
+        50: "#fef3c7",
+        100: "#fde68a", 
+        200: "#fcd34d",
+        300: "#fbbf24",
+        400: "#f59e0b",
+        500: "#d97706",
+        600: "#b45309",
+        700: "#92400e",
+        800: "#78350f",
+        900: "#451a03"
+      },
+      title: "Connecting...",
+      subtitle: "Please wait"
+      // No custom icon - Vapi will use its official default loading icon
+    },
+    active: {
+      color: {
+        50: "#dcfce7",
+        100: "#bbf7d0",
+        200: "#86efac", 
+        300: "#4ade80",
+        400: "#22c55e",
+        500: "#16a34a",
+        600: "#15803d",
+        700: "#166534",
+        800: "#14532d",
+        900: "#052e16"
+      },
+      title: "Listening...",
+      subtitle: "Speak now"
+      // No custom icon - Vapi will use its official default active icon
+    }
+  };
+
+  (function (d, t) {
+    var g = document.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    g.src =
+      "https://cdn.jsdelivr.net/gh/VapiAI/html-script-tag@latest/dist/assets/index.js";
+    g.defer = true;
+    g.async = true;
+    s.parentNode.insertBefore(g, s);
+
+    g.onload = function () {
+      vapiInstance = window.vapiSDK.run({
+        apiKey: "a6616a06-4ad8-4b28-8089-e3a98ffe4b86", // mandatory
+        assistant: "abf4afa2-c4e0-43d8-a1b6-6ae110980cd3", // mandatory
+        config: buttonConfig, // optional
+      });
+    };
+  })(document, "script");
+
+</script> -->
+
+<!-- Additional CSS to ensure proper positioning and prevent conflicts -->
+<style>
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Ensure Vapi button stays on the right side */
+  [data-vapi-button] {
+    position: fixed !important;
+    bottom: 120px !important; /* Position above your feedback form */
+    right: 20px !important;
+    left: auto !important;
+    z-index: 1001 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  [data-vapi-button]:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2) !important;
+  }
+  
+  /* Stack order: Vapi button highest, then feedback form, then AI assistant link */
+  [data-vapi-button] { z-index: 1002 !important; }
+  
+  
+  /* Hide Google Translate banner */
+  .goog-te-banner-frame {
+    display: none !important;
+  }
+  
+  /* Ensure body doesn't get shifted by Google Translate */
+  body {
+    top: 0 !important;
+  }
+</style>
+
+    <div id="root"></div>
+    
+    
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

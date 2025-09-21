@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Selector - HTML/JS Fallback</title>
+    <style>
+        /* Modern Language Selector Styles */
+        .language-selector-container {
+            display: inline-block;
+            position: relative;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .language-selector {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 8px 12px;
+            padding-right: 32px;
+            font-size: 14px;
+            font-weight: 500;
+            background: white;
+            color: #334155;
+            cursor: pointer;
+            outline: none;
+            min-width: 120px;
+            max-width: 150px;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            background-size: 14px;
+            font-family: inherit;
+        }
+
+        .language-selector:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
+            background: #f8fafc;
+        }
+
+        .language-selector:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+            background: #f8fafc;
+        }
+
+        .language-selector:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .language-selector option {
+            padding: 12px 16px;
+            background: white;
+            color: #334155;
+            font-weight: 500;
+            border: none;
+        }
+
+        .language-selector option:hover {
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .language-selector option:checked {
+            background: #3b82f6;
+            color: white;
+        }
+
+        /* Custom dropdown styling */
+        .language-selector::-ms-expand {
+            display: none;
+        }
+
+        /* Dark theme support */
+        .dark .language-selector {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-color: #334155;
+            color: #e2e8f0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .dark .language-selector:hover {
+            border-color: #60a5fa;
+            box-shadow: 0 4px 12px rgba(96, 165, 250, 0.2);
+            background: linear-gradient(135deg, #1e293b 0%, #1e40af 100%);
+        }
+
+        .dark .language-selector:focus {
+            border-color: #60a5fa;
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15);
+            background: linear-gradient(135deg, #1e293b 0%, #1e40af 100%);
+        }
+
+        .dark .language-selector option {
+            background: #1e293b;
+            color: #e2e8f0;
+        }
+
+        .dark .language-selector option:hover {
+            background: #334155;
+            color: #f1f5f9;
+        }
+
+        .dark .language-selector option:checked {
+            background: #60a5fa;
+            color: #0f172a;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .language-selector {
+                min-width: 120px;
+                padding: 8px 12px;
+                padding-right: 36px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .language-selector {
+                min-width: 100px;
+                padding: 6px 10px;
+                padding-right: 32px;
+                font-size: 12px;
+            }
+        }
+
+        /* Smooth animations */
+        .language-selector {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Demo styles */
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #f8fafc;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .demo-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .demo-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .demo-header h1 {
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+
+        .demo-header p {
+            color: #64748b;
+            margin: 0;
+        }
+
+        .demo-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 12px;
+        }
+
+        .demo-section h3 {
+            color: #334155;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .navbar-demo {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .navbar-demo .logo {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .navbar-demo .nav-items {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .settings-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: transparent;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            color: #64748b;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .settings-btn:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+        }
+
+        .theme-toggle {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .theme-btn {
+            padding: 8px 16px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .theme-btn:hover {
+            background: #2563eb;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-header">
+            <h1>🌍 Modern Language Selector</h1>
+            <p>Clean, responsive language dropdown with flags and smooth animations</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>📱 Navbar Integration (Next to Settings)</h3>
+            <div class="navbar-demo">
+                <div class="logo">Soul</div>
+                <div class="nav-items">
+                    <a href="#" class="settings-btn">
+                        <span>⚙️</span>
+                        <span>Settings</span>
+                    </a>
+                    <div class="language-selector-container">
+                        <select class="language-selector" id="languageSelector">
+                            <option value="en" data-flag="🇺🇸">English</option>
+                            <option value="hi" data-flag="🇮🇳">हिंदी (Hindi)</option>
+                            <option value="bn" data-flag="🇧🇩">বাংলা (Bengali)</option>
+                            <option value="te" data-flag="🇮🇳">తెలుగు (Telugu)</option>
+                            <option value="mr" data-flag="🇮🇳">मराठी (Marathi)</option>
+                            <option value="ta" data-flag="🇮🇳">தமிழ் (Tamil)</option>
+                            <option value="gu" data-flag="🇮🇳">ગુજરાતી (Gujarati)</option>
+                            <option value="kn" data-flag="🇮🇳">ಕನ್ನಡ (Kannada)</option>
+                            <option value="ml" data-flag="🇮🇳">മലയാളം (Malayalam)</option>
+                            <option value="pa" data-flag="🇮🇳">ਪੰਜਾਬੀ (Punjabi)</option>
+                            <option value="or" data-flag="🇮🇳">ଓଡ଼ିଆ (Odia)</option>
+                            <option value="as" data-flag="🇮🇳">অসমীয়া (Assamese)</option>
+                            <option value="ne" data-flag="🇳🇵">नेपाली (Nepali)</option>
+                            <option value="fr" data-flag="🇫🇷">Français (French)</option>
+                            <option value="es" data-flag="🇪🇸">Español (Spanish)</option>
+                            <option value="de" data-flag="🇩🇪">Deutsch (German)</option>
+                            <option value="it" data-flag="🇮🇹">Italiano (Italian)</option>
+                            <option value="pt" data-flag="🇵🇹">Português (Portuguese)</option>
+                            <option value="ru" data-flag="🇷🇺">Русский (Russian)</option>
+                            <option value="ja" data-flag="🇯🇵">日本語 (Japanese)</option>
+                            <option value="ko" data-flag="🇰🇷">한국어 (Korean)</option>
+                            <option value="zh-CN" data-flag="🇨🇳">中文 (Chinese)</option>
+                            <option value="ar" data-flag="🇸🇦">العربية (Arabic)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>🎨 Standalone Language Selector</h3>
+            <div class="language-selector-container">
+                <select class="language-selector" id="standaloneSelector">
+                    <option value="en" data-flag="🇺🇸">English</option>
+                    <option value="hi" data-flag="🇮🇳">हिंदी (Hindi)</option>
+                    <option value="bn" data-flag="🇧🇩">বাংলা (Bengali)</option>
+                    <option value="te" data-flag="🇮🇳">తెలుగు (Telugu)</option>
+                    <option value="mr" data-flag="🇮🇳">मराठी (Marathi)</option>
+                    <option value="ta" data-flag="🇮🇳">தமிழ் (Tamil)</option>
+                    <option value="gu" data-flag="🇮🇳">ગુજરાતી (Gujarati)</option>
+                    <option value="kn" data-flag="🇮🇳">ಕನ್ನಡ (Kannada)</option>
+                    <option value="ml" data-flag="🇮🇳">മലയാളം (Malayalam)</option>
+                    <option value="pa" data-flag="🇮🇳">ਪੰਜਾਬੀ (Punjabi)</option>
+                    <option value="or" data-flag="🇮🇳">ଓଡ଼ିଆ (Odia)</option>
+                    <option value="as" data-flag="🇮🇳">অসমীয়া (Assamese)</option>
+                    <option value="ne" data-flag="🇳🇵">नेपाली (Nepali)</option>
+                    <option value="fr" data-flag="🇫🇷">Français (French)</option>
+                    <option value="es" data-flag="🇪🇸">Español (Spanish)</option>
+                    <option value="de" data-flag="🇩🇪">Deutsch (German)</option>
+                    <option value="it" data-flag="🇮🇹">Italiano (Italian)</option>
+                    <option value="pt" data-flag="🇵🇹">Português (Portuguese)</option>
+                    <option value="ru" data-flag="🇷🇺">Русский (Russian)</option>
+                    <option value="ja" data-flag="🇯🇵">日本語 (Japanese)</option>
+                    <option value="ko" data-flag="🇰🇷">한국어 (Korean)</option>
+                    <option value="zh-CN" data-flag="🇨🇳">中文 (Chinese)</option>
+                    <option value="ar" data-flag="🇸🇦">العربية (Arabic)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="theme-toggle">
+            <button class="theme-btn" onclick="toggleTheme()">🌙 Toggle Dark Theme</button>
+        </div>
+    </div>
+
+    <script>
+        // Language selector functionality
+        function initializeLanguageSelectors() {
+            const selectors = document.querySelectorAll('.language-selector');
+            
+            selectors.forEach(selector => {
+                // Set default language based on browser language
+                const browserLang = navigator.language.split('-')[0];
+                const supportedLangs = ['en', 'hi', 'bn', 'te', 'mr', 'ta', 'gu', 'kn', 'ml', 'pa', 'or', 'as', 'ne', 'fr', 'es', 'de', 'it', 'pt', 'ru', 'ja', 'ko', 'zh-CN', 'ar'];
+                
+                if (supportedLangs.includes(browserLang)) {
+                    selector.value = browserLang;
+                } else {
+                    selector.value = 'en'; // Default to English
+                }
+
+                // Handle language change
+                selector.addEventListener('change', function() {
+                    const selectedLang = this.value;
+                    const selectedOption = this.options[this.selectedIndex];
+                    const flag = selectedOption.getAttribute('data-flag');
+                    const languageName = selectedOption.textContent;
+                    
+                    console.log(`Language changed to: ${selectedLang} (${flag} ${languageName})`);
+                    
+                    // Here you would integrate with your translation service
+                    // For example, with Google Translate:
+                    if (window.gtranslateSettings) {
+                        // Use GTranslate if available
+                        if (typeof window.translateTo === 'function') {
+                            window.translateTo(selectedLang);
+                        }
+                    }
+                    
+                    // Store language preference
+                    localStorage.setItem('selectedLanguage', selectedLang);
+                    
+                    // Show visual feedback
+                    showLanguageChangeFeedback(flag, languageName);
+                });
+            });
+        }
+
+        // Show feedback when language changes
+        function showLanguageChangeFeedback(flag, languageName) {
+            // Create a temporary notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #10b981;
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                z-index: 10000;
+                font-size: 14px;
+                font-weight: 500;
+                animation: slideIn 0.3s ease-out;
+            `;
+            notification.innerHTML = `${flag} Language changed to ${languageName}`;
+            
+            // Add animation keyframes
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from {
+                        transform: translateX(100%);
+                        opacity: 0;
+                    }
+                    to {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            document.body.appendChild(notification);
+            
+            // Remove notification after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideIn 0.3s ease-out reverse';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                    if (style.parentNode) {
+                        style.parentNode.removeChild(style);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Theme toggle functionality
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            const isDark = document.body.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        // Load saved theme
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark');
+            }
+        }
+
+        // Load saved language preference
+        function loadLanguagePreference() {
+            const savedLang = localStorage.getItem('selectedLanguage');
+            if (savedLang) {
+                const selectors = document.querySelectorAll('.language-selector');
+                selectors.forEach(selector => {
+                    selector.value = savedLang;
+                });
+            }
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTheme();
+            loadLanguagePreference();
+            initializeLanguageSelectors();
+        });
+
+        // GTranslate integration (if available)
+        if (typeof window.gtranslateSettings === 'undefined') {
+            window.gtranslateSettings = {
+                "default_language": "en",
+                "detect_browser_language": true,
+                "languages": ["en", "hi", "bn", "te", "mr", "ta", "gu", "kn", "ml", "pa", "or", "as", "ne", "fr", "es", "de", "it", "pt", "ru", "ja", "ko", "zh-CN", "ar"],
+                "wrapper_selector": ".gtranslate_wrapper"
+            };
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<svg width="400" height="200" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="200" fill="url(#gradient1)"/>
+  <defs>
+    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Storm clouds and lightning representing anxiety -->
+  <g opacity="0.9">
+    <!-- Main cloud -->
+    <path d="M80 120c0-20 16-36 36-36s36 16 36 36h20c11 0 20 9 20 20s-9 20-20 20H80c-11 0-20-9-20-20s9-20 20-20z" fill="white" opacity="0.8"/>
+    <!-- Lightning bolt -->
+    <path d="M140 130l-8 15h6l-6 12 8-15h-6l6-12z" fill="#FFD700"/>
+    <!-- Rain drops -->
+    <circle cx="90" cy="170" r="2" fill="white" opacity="0.7"/>
+    <circle cx="110" cy="175" r="2" fill="white" opacity="0.7"/>
+    <circle cx="130" cy="172" r="2" fill="white" opacity="0.7"/>
+    <circle cx="150" cy="178" r="2" fill="white" opacity="0.7"/>
+    <!-- Head silhouette -->
+    <path d="M250 100c20 0 36 16 36 36v40c0 20-16 36-36 36s-36-16-36-36v-40c0-20 16-36 36-36z" fill="#2D1B69" opacity="0.8"/>
+    <!-- Brain representation -->
+    <circle cx="260" cy="120" r="15" fill="white" opacity="0.3"/>
+    <path d="M250 115c5-5 15-5 20 0s5 15 0 20-15 5-20 0-5-15 0-20z" fill="none" stroke="white" stroke-width="2" opacity="0.5"/>
+  </g>
+</svg>

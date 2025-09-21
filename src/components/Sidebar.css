@@ -1,0 +1,38 @@
+/* Sidebar Blue Theme Override */
+.sidebar__container .text-primary {
+    color: #2563eb !important;
+}
+
+.sidebar__container .bg-primary\/10 {
+    background-color: rgba(37, 99, 235, 0.1) !important;
+}
+
+.sidebar__container .border-primary {
+    border-color: #2563eb !important;
+}
+
+.sidebar__container .hover\:text-primary:hover {
+    color: #2563eb !important;
+}
+
+.sidebar__container .hover\:bg-primary\/10:hover {
+    background-color: rgba(37, 99, 235, 0.1) !important;
+}
+
+/* Force blue colors for active states */
+.sidebar__container .active {
+    color: #2563eb !important;
+    background-color: rgba(37, 99, 235, 0.1) !important;
+    border-left-color: #2563eb !important;
+}
+
+/* Force blue colors for logo icon */
+.sidebar__container .logo-icon {
+    color: #2563eb !important;
+}
+
+/* Override any green colors that might be cached */
+.sidebar__container * {
+    --tw-text-primary: #2563eb !important;
+    --tw-bg-primary: #2563eb !important;
+} 
